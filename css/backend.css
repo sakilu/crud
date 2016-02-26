@@ -1,0 +1,95 @@
+.spinner {
+    margin: 100px auto;
+    width: 50px;
+    height: 45px;
+    text-align: center;
+    font-size: 10px;
+}
+
+.spinner > div {
+    background-color: #303641;
+    height: 100%;
+    width: 6px;
+    display: inline-block;
+
+    -webkit-animation: stretchdelay 1.2s infinite ease-in-out;
+    animation: stretchdelay 1.2s infinite ease-in-out;
+}
+
+.spinner .rect2 {
+    -webkit-animation-delay: -1.1s;
+    animation-delay: -1.1s;
+}
+
+.spinner .rect3 {
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+}
+
+.spinner .rect4 {
+    -webkit-animation-delay: -0.9s;
+    animation-delay: -0.9s;
+}
+
+.spinner .rect5 {
+    -webkit-animation-delay: -0.8s;
+    animation-delay: -0.8s;
+}
+
+.crud_list {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.crud_list:hover {
+    overflow: visible;
+}
+
+@-webkit-keyframes stretchdelay {
+    0%, 40%, 100% {
+        -webkit-transform: scaleY(0.4)
+    }
+    20% {
+        -webkit-transform: scaleY(1.0)
+    }
+}
+
+@keyframes stretchdelay {
+    0%, 40%, 100% {
+        transform: scaleY(0.4);
+        -webkit-transform: scaleY(0.4);
+    }
+    20% {
+        transform: scaleY(1.0);
+        -webkit-transform: scaleY(1.0);
+    }
+}
+
+@media print {
+    body {
+        min-height: 10px;
+    }
+}
+
+div.appendGrid table td.last {
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    min-width: 91px;
+}
+
+.ui-datepicker {
+    z-index: 10000 !important;
+}
+
+/*table.dataTable.table-striped {*/
+/*margin-top: 0px !important;*/
+/*margin-bottom: 0px !important;*/
+/*font-size: 10px;*/
+/*}*/
+
+/*table.dataTable thead > tr > th {*/
+/*padding-left: 10px;*/
+/*padding-right: 0px;*/
+/*}*/
