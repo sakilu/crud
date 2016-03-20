@@ -6,7 +6,7 @@
 <script src="<?= base_url() ?>vendor/plugins/datatables/media/js/jquery.dataTables.js"></script>
 
 <!-- Datatables Tabletools addon -->
-<!--<script src="--><?//= base_url() ?><!--vendor/plugins/datatables/extensions/TableTools/js/dataTables.tableTools.min.js"-->
+<!--<script src="--><? //= base_url() ?><!--vendor/plugins/datatables/extensions/TableTools/js/dataTables.tableTools.min.js"-->
 <!--        chartset="utf8"></script>-->
 
 <!-- Datatables ColReorder addon -->
@@ -89,12 +89,12 @@
         setInterval(session_check, 6000);
         function session_check() {
             $.ajax({
-                url: '<?=base_url(sprintf('%s/login/is_logged/', $this->crud->get_prefix()));?>',
+                url: '<?=base_url(sprintf('%slogin/is_logged/', $this->crud->get_prefix()));?>',
                 success: function (data) {
                     if (data == 'yah!good') {
                     }
                     else if (data == 'nope!bad') {
-                        location.replace('<?=base_url(sprintf('%s/login', $this->crud->get_prefix()));?>');
+                        location.replace('<?=base_url(sprintf('%slogin', $this->crud->get_prefix()));?>');
                     }
                 },
                 error: function (e) {
@@ -102,6 +102,7 @@
                 }
             });
         }
+
         <?php } ?>
     });
 </script>
@@ -123,7 +124,8 @@
             <!-- end .form-body section -->
 
             <div class="panel-footer text-right">
-                <button type="button" onclick="prompt_cancel()" id="prompt-form-cancel" class="btn btn-default">取消</button>
+                <button type="button" onclick="prompt_cancel()" id="prompt-form-cancel" class="btn btn-default">取消
+                </button>
                 <button type="button" id="prompt-form-submit" class="btn btn-primary">送出</button>
             </div>
             <!-- end .form-footer section -->

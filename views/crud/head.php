@@ -37,6 +37,10 @@
     <!-- Animate CSS -->
     <link rel="stylesheet" type="text/css" href="<?= base_url() ?>vendor/plugins/animate/animate.min.css">
 
+    <!-- Plugin CSS  -->
+    <link rel="stylesheet" type="text/css" href="<?= base_url() ?>vendor/plugins/fullcalendar/fullcalendar.min.css"
+          media="screen">
+
     <!-- Vendor CSS -->
     <link rel="stylesheet" type="text/css" href="<?= base_url() ?>vendor/plugins/magnific/magnific-popup.css">
 
@@ -72,8 +76,13 @@
     <script src="<?= base_url() ?>vendor/jquery/jquery-1.11.1.min.js"></script>
     <script src="<?= base_url() ?>vendor/jquery/jquery_ui/jquery-ui.min.js"></script>
 
-<!--    <link href="--><?//= base_url() ?><!--assets/css/jquery.appendGrid-1.6.1.css" rel="stylesheet"/>-->
+    <!--    <link href="--><? //= base_url() ?><!--assets/css/jquery.appendGrid-1.6.1.css" rel="stylesheet"/>-->
     <script src="<?= base_url() ?>crud/js/jquery.appendGrid-1.6.1.js"></script>
+
+    <!-- FullCalendar Plugin + Moment Dependency -->
+    <script src='<?= base_url() ?>vendor/plugins/fullcalendar/lib/moment.min.js'></script>
+    <script src='<?= base_url() ?>vendor/plugins/fullcalendar/fullcalendar.min.js'></script>
+
 
 </head>
 
@@ -108,9 +117,21 @@
                 </a>
                 <ul class="dropdown-menu list-group dropdown-persist w250" role="menu">
                     <li class="list-group-item">
-                        <a href="<?= base_url(sprintf('%s/login/form', $this->crud->get_prefix())) ?>"
+                        <a href="<?= base_url(sprintf('%slogin/form', $this->crud->get_prefix())) ?>"
                            class="animated animated-short fadeInUp">
                             <span class="fa fa-gear"></span> 變更密碼 </a>
+                    </li>
+                    <?php if ($this->auth->is_administrator()) { ?>
+                        <li class="list-group-item">
+                            <a href="<?= base_url(sprintf('/administrator/git/form')) ?>"
+                               class="animated animated-short fadeInUp">
+                                <span class="fa fa-star"></span> 管理員 </a>
+                        </li>
+                    <?php } ?>
+                    <li class="list-group-item">
+                        <a href="<?= base_url(sprintf('%s/dashboard', $this->crud->get_prefix())) ?>"
+                           class="animated animated-short fadeInUp">
+                            <span class="glyphicon glyphicon-home"></span> 首頁 </a>
                     </li>
                     <li class="dropdown-footer">
                         <a href="<?= base_url($this->crud->get_module_url() . '/logout') ?>" class="">

@@ -29,5 +29,13 @@ if (!function_exists('get_col_info')) {
         }
         return $enums;
     }
+
+    function hash_pwd($pwd)
+    {
+        defined('ALGO')      OR define('ALGO', 'sha512'); // highest automatically-assigned error code
+        $salt1 = 'ekOEjijv@#$IFV23#()$I)';
+        $salt2 = 'workp345vkk203k1v...qwkep@@!!';
+        return hash(ALGO, $salt1.$pwd.$salt2);
+    }
 }
 

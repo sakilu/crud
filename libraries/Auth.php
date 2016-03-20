@@ -72,6 +72,15 @@ class Auth extends AbstractAuth
         return false;
     }
 
+    public function is_administrator()
+    {
+        $row = $this->get();
+        if (!$row) return false;
+        $auth = $this->config->item('auth');
+        $allow = $this->config->item('administrator');
+        return in_array($row->{$auth['db_column_google']}, $allow);
+    }
+
 
     public function google_login($object)
     {
