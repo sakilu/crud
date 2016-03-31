@@ -43,11 +43,13 @@
             </button>
         <?php } ?>
     </span>
-        <?php if ($this->router->fetch_method() == 'ajax_form') { ?>
-            <span class="topbar-right hidden-xs hidden-sm">
-
-            </span>
+    <span class="topbar-right hidden-xs hidden-sm">
+        <?php if ($this->router->fetch_method() == 'index' && !$this->layout->disable_excel) { ?>
+            <!-- 列表跳到至新增 -->
+            <button type="button" onclick="excel<?= $rand ?>()"
+                    class="btn btn-sm btn-primary"><i class="imoon imoon-file-excel"></i> Excel
+            </button>
         <?php } ?>
-
+    </span>
     </header>
 <?php } ?>

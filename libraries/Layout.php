@@ -10,6 +10,8 @@ class Layout
 
     public $disable_add = false;
 
+    public $disable_excel = false;
+
     public $title = '';
 
     public $content_path = '';

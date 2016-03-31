@@ -599,7 +599,14 @@ class Column_custom extends AbstractColumn
 
     public function get_yadcf_setting($key)
     {
-        return '';
+        return sprintf('{
+                        column_number: %d,
+                        filter_type: "text",
+                        column_data_type: "html",
+                        filter_reset_button_text: false,
+                        style_class: "form-control",
+                        filter_default_label: ""
+                    },', $key);
     }
 }
 
