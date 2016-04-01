@@ -3,7 +3,6 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 class Crud_model extends CI_Model
 {
-    // FILE_UPLOAD
     function img_thumb($type, $id, $ext = '.jpg', $width = '400', $height = '400')
     {
         $this->load->library('image_lib');
