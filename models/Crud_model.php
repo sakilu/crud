@@ -8,35 +8,6 @@ class Crud_model extends CI_Model
         parent::__construct();
     }
 
-    function clear_cache()
-    {
-        $this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
-        $this->output->set_header('Pragma: no-cache');
-    }
-
-    /////////GET NAME BY TABLE NAME AND ID/////////////
-    function get_type_name_by_id($type, $type_id = '', $field = 'name')
-    {
-        if ($type_id != '') {
-            $l = $this->db->get_where($type, array(
-                $type . '_id' => $type_id
-            ));
-            $n = $l->num_rows();
-            if ($n > 0) {
-                return $l->row()->$field;
-            }
-        }
-    }
-
-    /////////Filter One/////////////
-    function filter_one($table, $type, $value)
-    {
-        $this->db->select('*');
-        $this->db->from($table);
-        $this->db->where($type, $value);
-        return $this->db->get()->result_array();
-    }
-
     // FILE_UPLOAD
     function img_thumb($type, $id, $ext = '.jpg', $width = '400', $height = '400')
     {
