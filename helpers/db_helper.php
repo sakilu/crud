@@ -20,7 +20,7 @@ if (!function_exists('get_col_info')) {
     function gender_enums($table, $field)
     {
         $ci = &get_instance();
-        $row = $ci->db->query("SHOW COLUMNS FROM " . $table . " LIKE '$field'")->row()->Type;
+        $row = $ci->db->query("SHOW COLUMNS FROM `" . $table . "` LIKE '$field'")->row()->Type;
         $regex = "/'(.*?)'/";
         preg_match_all($regex, $row, $enum_array);
         $enum_fields = $enum_array[1];
@@ -32,10 +32,13 @@ if (!function_exists('get_col_info')) {
 
     function hash_pwd($pwd)
     {
-        defined('ALGO')      OR define('ALGO', 'sha512'); // highest automatically-assigned error code
-        $salt1 = 'ekOEjijv@#$IFV23#()$I)';
-        $salt2 = 'workp345vkk203k1v...qwkep@@!!';
-        return hash(ALGO, $salt1.$pwd.$salt2);
+        return sha1($pwd);
+    }
+
+    function validateDate($date, $format = 'Y-m-d H:i:s')
+    {
+        $d = DateTime::createFromFormat($format, $date);
+        return $d && $d->format($format) == $date;
     }
 }
 
