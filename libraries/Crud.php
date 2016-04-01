@@ -276,7 +276,7 @@ abstract class AbstractColumn
             return $value;
         }
         if (strpos($type, 'text') !== false) {
-            return mb_substr($value, 0, 20, 'UTF-8') . '...';
+            return mb_substr($value, 0, 20, 'UTF-8');
         }
 
         $options = $this->get(Column::KEY_OPTIONS);
@@ -366,8 +366,8 @@ abstract class AbstractColumn
         } elseif (strpos($type, 'set') !== false) {
             $data = [];
             $options = $this->get(Column::KEY_OPTIONS);
-            sort($options);
             if (!empty($options)) {
+                sort($options);
                 foreach ($options as $option) {
                     $data[] = sprintf('"%s"', $option);
                 }
