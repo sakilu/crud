@@ -23,9 +23,7 @@
 <?php } ?>
 <?php if (!$this->layout->is_ajax_request()) { ?>
 </div>
-<!-- End: Main -->
 <?php $this->load->view('crud/script'); ?>
-<!-- END: PAGE SCRIPTS -->
 </body>
 </html>
 <?php } ?>
