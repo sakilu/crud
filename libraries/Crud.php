@@ -452,6 +452,23 @@ class Column_youtube extends AbstractColumn
     }
 }
 
+class Column_single_file extends AbstractColumn
+{
+    public function get_yadcf_setting($key)
+    {
+        return '';
+    }
+
+    public function get_value($value, $row)
+    {
+        if (empty($value)) return '';
+        $data = $this->uploads->read($value);
+        if (empty($data)) return '';
+        return sprintf('<button class="btn btn-primary btm-sm" onclick="window.open(\'%s\')">開啟</button>',
+            base_url($data[0]['path']));
+    }
+}
+
 class Column_single_img extends AbstractColumn
 {
     public $by_db = false;

@@ -230,6 +230,19 @@ class Form
         return $this->load->view('crud/form_help/single_img', $view_data, true);
     }
 
+    public function single_file($field_name, $attr = [])
+    {
+        $data = $this->data();
+        $id = $data->{$field_name};
+        $unique = uniqid();
+        $view_data = [
+            'unique' => $unique,
+            'field_name' => $field_name,
+            'row' => $this->db->get_where('files', ['id' => $id])->row()
+        ];
+        return $this->load->view('crud/form_help/single_file', $view_data, true);
+    }
+
     public function multiselect($field_name, $attr = [], $value = array())
     {
         $column = $this->get_column($field_name);
