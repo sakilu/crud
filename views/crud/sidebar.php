@@ -1,18 +1,3 @@
-<!-----------------------------------------------------------------+ 
-       "#sidebar_left" Helper Classes: 
-    -------------------------------------------------------------------+ 
-       * Positioning Classes: 
-        '.affix' - Sets Sidebar Left to the fixed position 
-
-       * Available Skin Classes:
-         .sidebar-dark (default no class needed)
-         .sidebar-light  
-         .sidebar-light.light   
-    -------------------------------------------------------------------+
-       Example: <aside id="sidebar_left" class="affix sidebar-light">
-       Results: Fixed Left Sidebar with light/white background
-    ------------------------------------------------------------------->
-
 <!-- Start: Sidebar -->
 <aside id="sidebar_left">
 
