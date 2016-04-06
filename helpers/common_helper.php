@@ -26,7 +26,7 @@ if (!function_exists('get_site_config')) {
         if ($ci->db->field_exists($table . '_trash', $table)) {
             $ci->db->where($table . '_trash', 0);
         }
-        $ci->db->select($name);
+        $ci->db->select($table . "_id, $name");
         $ci->db->order_by($name);
         $rows = $ci->db->get($table)->result();
         $return = [];
