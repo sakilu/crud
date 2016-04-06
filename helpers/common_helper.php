@@ -6,7 +6,7 @@ if (!function_exists('get_site_config')) {
     {
         $ci = &get_instance();
         $v = $ci->config->item($k);
-        if(!empty($v)){
+        if (!empty($v)) {
             return $v;
         }
 
@@ -20,8 +20,24 @@ if (!function_exists('get_site_config')) {
         $ci->logger->addDebug($message, $context);
     }
 
+    function get_options($table, $name)
+    {
+        $ci = &get_instance();
+        if ($ci->db->field_exists($table . '_trash', $table)) {
+            $ci->db->where($table . '_trash', 0);
+        }
+        $ci->db->select($name);
+        $ci->db->order_by($name);
+        $rows = $ci->db->get($table)->result();
+        $return = [];
+        foreach ($rows as $row) {
+            $return[$row->{$table . '_id'}] = $row->{$name};
+        }
+        return $return;
+    }
+
     function img_exists($type, $id, $width = '100', $height = '100', $thumb = 'no', $src = 'no', $multi = '',
-                            $multi_num = '', $ext = '.jpg')
+                        $multi_num = '', $ext = '.jpg')
     {
         if ($multi == '') {
             if (file_exists('uploads/' . $type . '_image/' . $type . '_' . $id . $ext)) {
