@@ -258,7 +258,7 @@ abstract class AbstractColumn
         }
         if (strpos($type, 'int') !== false) {
             $options = $this->get(Column::KEY_OPTIONS);
-            if (!empty($options)) {
+            if (!empty($options) && isset($options[$value])) {
                 return $options[$value];
             }
             return intval($value);
@@ -270,7 +270,7 @@ abstract class AbstractColumn
 
         if (strpos($type, 'enum') !== false) {
             $options = $this->get(Column::KEY_OPTIONS);
-            if (!empty($options)) {
+            if (!empty($options) && isset($options[$value])) {
                 return $options[$value];
             }
             return $value;
