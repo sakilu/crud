@@ -36,6 +36,26 @@ if (!function_exists('get_site_config')) {
         return $return;
     }
 
+    function get_options_by_group($table, $name, $group_by)
+    {
+        $ci = &get_instance();
+        if ($ci->db->field_exists($table . '_trash', $table)) {
+            $ci->db->where($table . '_trash', 0);
+        }
+        $ci->db->select($table . "_id, $name, $group_by");
+        $ci->db->order_by($name);
+        $rows = $ci->db->get($table)->result();
+        $return = [];
+        foreach ($rows as $row) {
+            $return[$row->{$group_by}][] = [
+                'id' => $row->{$table . '_id'},
+                'text' => $row->{$name}
+            ];
+        }
+        return $return;
+    }
+
+
     function img_exists($type, $id, $width = '100', $height = '100', $thumb = 'no', $src = 'no', $multi = '',
                         $multi_num = '', $ext = '.jpg')
     {

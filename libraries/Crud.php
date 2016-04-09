@@ -116,7 +116,7 @@ class Crud
         $db = $this->get_db();
         $db->query("SET time_zone='+8:00'");
 
-        $table = $this->get(Crud::KEY_TABLE, 'brief');
+        $table = $this->get(Crud::KEY_TABLE);
         $select = [];
         foreach ($this->get(self::KEY_COLUMNS) as $column) {
             if ($column instanceof AbstractColumn && $column->by_db) {

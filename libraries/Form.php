@@ -161,6 +161,26 @@ class Form
         return $html;
     }
 
+    public function trigger_select($field_name, $trigger_field, $value = null)
+    {
+        $column = $this->get_column($field_name);
+        $options = $column->get(Column::KEY_OPTIONS);
+        if (is_null($value)) {
+            $data = $this->data();
+            $value = empty($data->{$field_name}) ? array() : $data->{$field_name};
+        }
+        $unique = uniqid();
+        $attr = [
+            'unique' => $unique,
+            'options' => $options,
+            'value' => $value,
+            'trigger_field' => $trigger_field,
+            'field_name' => $field_name
+        ];
+        return $this->load->view('crud/form_help/trigger_select', $attr, true);
+    }
+
+
     /**
      * html select
      * @param $field_name
