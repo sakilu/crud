@@ -21,12 +21,12 @@ class Crud
     const KEY_SELECT_COLUMNS = 'key_select_columns';
 
     /**
-     * @var CI_Controller 
+     * @var CI_Controller
      */
     protected $CI;
 
     /**
-     *
+     * 
      */
     public function __construct()
     {
