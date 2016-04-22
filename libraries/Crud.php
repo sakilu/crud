@@ -20,11 +20,14 @@ class Crud
      */
     const KEY_SELECT_COLUMNS = 'key_select_columns';
 
+    protected $CI;
+
     /**
      *
      */
     public function __construct()
     {
+        $this->CI = &get_instance();
         $this->_config = $this->config->item(strtolower(get_class($this)));
         $this->set(self::KEY_SELECT_COLUMNS, []);
         $this->db = $this->load->database('default', true);
@@ -152,7 +155,12 @@ class Crud
                     } else {
                         $origin_value = '';
                     }
-                    $_row[$i++] = $column->get_value($origin_value, $_db_row);
+                    $callback = $column->get(Column::KEY_CALLBACK_GETVALUE);
+                    if (!empty($callback) && method_exists($this->CI, $callback)) {
+                        $_row[$i++] = $this->CI->$callback($origin_value, $_db_row);
+                    } else {
+                        $_row[$i++] = $column->get_value($origin_value, $_db_row);
+                    }
                 }
             }
             $return_data[] = $_row;
@@ -201,6 +209,9 @@ abstract class AbstractColumn
     const KEY_DISPLAY = 'key_display';
 
     const KEY_OPTIONS = 'key_options';
+
+    const KEY_CALLBACK_GETVALUE = 'key_callback_value';
+
 
     public function __construct($_table, $_field, $_display, $width = null)
     {
@@ -404,6 +415,17 @@ abstract class AbstractColumn
 class Column extends AbstractColumn
 {
 
+}
+
+class Column_user extends AbstractColumn
+{
+    public function get_value($value, $row)
+    {
+        if ($value) {
+            return json_decode($value)->name;
+        }
+        return $value;
+    }
 }
 
 class Column_prototype extends AbstractColumn
