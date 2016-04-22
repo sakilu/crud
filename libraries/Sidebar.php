@@ -37,7 +37,7 @@ class Sidebar
             if (empty($menu['children'])) {
                 if ($menu['role'] && !in_array($menu['role'], $roles)) continue;
                 $active = ($menu['role'] == $this->crud->get_module_name() ||
-                    (empty($menu['role']) && $this->crud->get_module_name() == strtolower($menu['name']))) ?
+                    (empty($menu['role']) && strpos($menu['url'], '/' . $this->crud->get_module_name()) !== false)) ?
                     ' class="active"' : '';
                 $return_str .= sprintf('
                     <li%s>
