@@ -6,7 +6,7 @@ class Crud
 {
     use Container;
 
-    /** 
+    /**  
      * 存放 Crud 的處理欄位
      */
     const KEY_COLUMNS = 'key_columns';
