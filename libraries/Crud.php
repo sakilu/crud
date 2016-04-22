@@ -26,7 +26,7 @@ class Crud
     protected $CI;
 
     /**
-     * 
+     *
      */
     public function __construct()
     {
