@@ -72,7 +72,11 @@ abstract class TEST_Controller extends CI_Controller
         if (!is_array($res_body) && !is_object($res_body)) {
             echo $res_body;
         } else {
-            var_dump($res_body);
+            if (@isset($req_body['error']) && @$req_body['error'] == false) {
+                var_dump($res_body['body']);
+            } else {
+                var_dump($res_body);
+            }
         }
     }
 
