@@ -11,31 +11,7 @@ abstract class TEST_Controller extends CI_Controller
     {
         parent::__construct();
         $this->load->library('unit_test');
-    }
-
-    public function get_signature()
-    {
-        $time = time();
-        $public_key = $this->_public_key;
-        $type = TYPE_GOOGLE;
-        $config = $this->config->item('login_type');
-
-        $rand_str = 'hewfwelpgweg';
-        $private_key = $this->db->get_where('user', [
-            'user_mail' => 'kookooad@gmail.com'
-        ])->row()->user_login_token;
-
-        $stringToSign = md5($public_key . $time . $private_key . $rand_str . $config[$type]);
-        $signature = base64_encode(hash_hmac('sha1', $stringToSign, $private_key, true));
-
-        return [
-            "cache-control: no-cache",
-            "public_key: $public_key",
-            "rand_str: $rand_str",
-            "signature: $signature",
-            "time: $time",
-            "type: $type"
-        ];
+        $this->load->model('mocks/user_mock');
     }
 
     protected function test($method, $url, $auth, $param = null, $no_debug = false)
@@ -53,7 +29,7 @@ abstract class TEST_Controller extends CI_Controller
             CURLOPT_VERBOSE => 1
         ];
         if ($auth) {
-            $curl_options[CURLOPT_HTTPHEADER] = $this->get_signature();
+            $curl_options[CURLOPT_HTTPHEADER] = $this->user_mock->get_signature();
         }
         if ($param) {
             $curl_options[CURLOPT_POSTFIELDS] = $param;
