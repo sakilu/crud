@@ -76,7 +76,7 @@ class Auth extends AbstractAuth
         $admin_id = $query->row()->{$this->config('db_column_key')};
         $this->session->set_userdata($this->config('session_key'), $admin_id);
         $this->db->where($this->config('db_column_user'), $email);
-        $this->db->update('admin', [$this->config('admin_fb_id') => $object['id']]);
+        $this->db->update('admin', [$this->config('db_column_fb') => $object['id']]);
         return true;
     }
 
