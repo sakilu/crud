@@ -12,28 +12,30 @@ abstract class API_Controller extends REST_Controller
         parent::__construct();
         libxml_disable_entity_loader(false);
 
-        $header = [];
-        foreach (getallheaders() as $key => $value) {
-            $header[] = $key . ' : ' . $value;
-        }
-        $content = file_get_contents("php://input");
-        $post = [];
-        if (!$content) {
-            foreach ($_POST as $key => $value) {
-                $post[] = sprintf('%s - %s', $key, $value);
+        if (strpos($_SERVER["REQUEST_URI"], 'logs') === false) {
+            $header = [];
+            foreach (getallheaders() as $key => $value) {
+                $header[] = $key . ' : ' . $value;
             }
-            $content = implode('<br />', $post);
-        }
+            $content = file_get_contents("php://input");
+            $post = [];
+            if (!$content) {
+                foreach ($_POST as $key => $value) {
+                    $post[] = sprintf('%s - %s', $key, $value);
+                }
+                $content = implode('<br />', $post);
+            }
 
-        $this->db->insert('debug', [
-            'url' => $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"],
-            'datetime' => date('Y-m-d H:i:s'),
-            'header' => implode(',', $header),
-            'body' => $content,
-            'timestamp' => time()
-        ]);
-        $this->db->where('timestamp <', time()-7200);
-        $this->db->delete('debug');
+            $this->db->insert('debug', [
+                'url' => $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"],
+                'datetime' => date('Y-m-d H:i:s'),
+                'header' => implode(',', $header),
+                'body' => $content,
+                'timestamp' => time()
+            ]);
+            $this->db->where('timestamp <', time() - 7200);
+            $this->db->delete('debug');
+        }
     }
 
     protected function _response($data, $http_code = 200, $msg = null)
