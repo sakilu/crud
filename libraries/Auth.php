@@ -69,7 +69,15 @@ class Auth extends AbstractAuth
 
     public function fb_login($object)
     {
-        return false;
+        @$email = $object['email'];
+        $this->db->where($this->config('db_column_user'), $email);
+        $query = $this->db->get($this->config('table'));
+        if (!$query->num_rows()) return false;
+        $admin_id = $query->row()->{$this->config('db_column_key')};
+        $this->session->set_userdata($this->config('session_key'), $admin_id);
+        $this->db->where($this->config('db_column_user'), $email);
+        $this->db->update('admin', [$this->config('admin_fb_id') => $object['id']]);
+        return true;
     }
 
     public function is_administrator()
