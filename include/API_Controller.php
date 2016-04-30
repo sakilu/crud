@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-require(APPPATH . 'libraries/REST_Controller.php');
+require(FCPATH . 'crud/include/REST_Controller.php'); 
 
 abstract class API_Controller extends REST_Controller
 {
