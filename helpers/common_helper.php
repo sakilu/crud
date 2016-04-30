@@ -2,6 +2,29 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 if (!function_exists('get_site_config')) {
+
+    function generate_key()
+    {
+        $key = "";
+
+        $key_part = 7;
+        $key_chunk = 6;
+        $key_div = "-";
+        $num_range_low = 48;
+        $num_range_high = 57;
+        $chr_range_low = 65;
+        $chr_range_high = 90;
+
+        for ($i = 0; $i != $key_part; $i++) {
+            for ($x = 0; $x != $key_chunk; $x++) {
+                $key .= (mt_rand() & 1 == 1 ? chr(mt_rand($num_range_low, $num_range_high)) :
+                    chr(mt_rand($chr_range_low, $chr_range_high)));
+            }
+            $key .= $key_div;
+        }
+        return trim($key, $key_div);
+    }
+
     function get_site_config($k, $config_file = 'site')
     {
         $ci = &get_instance();
