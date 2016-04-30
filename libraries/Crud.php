@@ -6,7 +6,7 @@ class Crud
 {
     use Container;
 
-    /**  
+    /**
      * 存放 Crud 的處理欄位
      */
     const KEY_COLUMNS = 'key_columns';
@@ -276,6 +276,9 @@ abstract class AbstractColumn
             if (!empty($options) && isset($options[$value])) {
                 return $options[$value];
             }
+            if (!empty($options) && !isset($options[$value])) {
+                return '';
+            }
             return intval($value);
         }
         if (strpos($type, 'float') !== false || strpos($type, 'double') || strpos($type, 'decimal') !== false
@@ -312,6 +315,18 @@ abstract class AbstractColumn
         $key_info = $this->get(self::KEY_INFO);
         $type = ($key_info instanceof Field_info) ? $key_info->get_type() : false;
         $options = $this->get(Column::KEY_OPTIONS);
+
+        if (strpos($type, 'int') !== false && !empty($options)
+        ) {
+            return sprintf('{
+                        column_number: %d,
+                        filter_type: "text",
+                        filter_reset_button_text: false,
+                        style_class: "form-control",
+                        filter_default_label: ""
+                    },', $key);
+        }
+
         if (!empty($options)) {
             foreach ($options as $option) {
                 $data[] = sprintf('"%s"', $option);
