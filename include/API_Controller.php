@@ -61,7 +61,9 @@ abstract class API_Controller extends REST_Controller
         }
 
         if (!in_array($type, [
-            TYPE_GOOGLE
+            TYPE_GOOGLE,
+            TYPE_FB,
+            TYPE_MAIL
         ])
         ) {
             $this->_response(null, 401, 'type 錯誤');
