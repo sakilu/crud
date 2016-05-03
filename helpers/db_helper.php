@@ -39,7 +39,7 @@ if (!function_exists('get_col_info')) {
     {
         $d = DateTime::createFromFormat($format, $date);
         return $d && $d->format($format) == $date;
-    } 
+    }
 
 }
 
@@ -48,7 +48,7 @@ if (!function_exists('ddd')) {
     {
         $ci = &get_instance();
         if ($ci->db->table_exists('debug')) {
-            $ci->db->insert('ddd', ['debug_msg' => $msg]);
+            $ci->db->insert('debug', ['debug_msg' => $msg]);
         }
     }
 }
