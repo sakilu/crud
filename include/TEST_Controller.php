@@ -30,6 +30,7 @@ abstract class TEST_Controller extends CI_Controller
         ];
 
         if ($param) {
+            $dump = $param;
             $curl_options[CURLOPT_POSTFIELDS] = $param;
         }
 
@@ -43,7 +44,7 @@ abstract class TEST_Controller extends CI_Controller
         $body = substr($response, $header_size);
 
         echo nl2br($info['request_header']);
-        if ($param) var_dump($param);
+        if ($dump) var_dump($dump);
         echo '<hr >';
         echo nl2br($header);
         echo $body;

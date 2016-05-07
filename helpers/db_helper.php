@@ -53,3 +53,13 @@ if (!function_exists('ddd')) {
     }
 }
 
+if (!function_exists('dd')) {
+    function dd($msg)
+    {
+        $ci = &get_instance();
+        if ($ci->db->table_exists('debug_msg')) {
+            $ci->db->insert('debug_msg', ['debug_msg_string' => $msg]);
+        }
+    }
+}
+
