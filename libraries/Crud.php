@@ -351,8 +351,8 @@ abstract class AbstractColumn
                         style_class: "form-control",
                         filter_default_label: ""
                     },', $key);
-        } elseif (strpos($type, 'int') !== false || strpos($type, 'float') !== false || strpos($type, 'double') ||
-            strpos($type, 'decimal') !== false
+        } elseif (strpos($type, 'int') !== false || strpos($type, 'float') !== false ||
+            strpos($type, 'double') !== false || strpos($type, 'decimal') !== false
         ) {
             return sprintf('{
                         column_number: %d,
@@ -507,6 +507,20 @@ class Column_single_file extends AbstractColumn
         if (empty($data)) return '';
         return sprintf('<button class="btn btn-primary btm-sm" onclick="window.open(\'%s\')">開啟</button>',
             base_url($data[0]['path']));
+    }
+}
+
+class Column_upload extends AbstractColumn
+{
+    public function get_yadcf_setting($key)
+    {
+        return '';
+    }
+
+    public function get_value($value, $row)
+    {
+        if (empty($value)) return '';
+
     }
 }
 
