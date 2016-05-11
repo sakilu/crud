@@ -103,6 +103,8 @@ abstract class TEST_Controller extends CI_Controller
 
     protected function response($res_header, $res_body, $req_header, $req_body = null)
     {
+        echo 'http://www.jsoneditoronline.org/';
+        echo '<br />';
         echo nl2br($req_header);
         if ($req_body) var_dump($req_body);
         echo '<hr >';
@@ -110,11 +112,7 @@ abstract class TEST_Controller extends CI_Controller
         if (!is_array($res_body) && !is_object($res_body)) {
             echo $res_body;
         } else {
-            if (is_array($res_body)) {
-                echo json_encode($res_body);
-            } else {
-                var_dump($res_body);
-            }
+            echo json_encode($res_body);
         }
     }
 
