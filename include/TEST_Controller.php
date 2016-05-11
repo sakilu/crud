@@ -110,9 +110,9 @@ abstract class TEST_Controller extends CI_Controller
         echo '<hr >';
         echo nl2br($res_header);
         if (!is_array($res_body) && !is_object($res_body)) {
-            echo $res_body;
+            echo '<pre>' . $res_body . '</pre>';
         } else {
-            echo json_encode($res_body);
+            echo '<pre>' . json_encode($res_body) . '</pre>';
         }
     }
 
