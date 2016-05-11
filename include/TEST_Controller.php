@@ -103,10 +103,10 @@ abstract class TEST_Controller extends CI_Controller
 
     protected function response($res_header, $res_body, $req_header, $req_body = null)
     {
-        echo 'http://www.jsoneditoronline.org/';
+        echo 'json解析用網址 => http://www.jsoneditoronline.org/';
         echo '<br />';
         echo nl2br($req_header);
-        if ($req_body) var_dump($req_body);
+        if ($req_body) echo json_encode($req_body);
         echo '<hr >';
         echo nl2br($res_header);
         if (!is_array($res_body) && !is_object($res_body)) {
