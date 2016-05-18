@@ -302,7 +302,7 @@ abstract class AbstractColumn
             $return_array = [];
             foreach (explode(',', trim($value)) as $v) {
                 if (empty($v)) continue;
-                $return_array[] = $options[$v];
+                @$return_array[] = $options[$v];
                 sort($return_array);
             }
             return implode('<br />', $return_array);
