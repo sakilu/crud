@@ -89,10 +89,12 @@ abstract class TEST_Controller extends CI_Controller
         @$this->unit->run($info['http_code'], '200', 'http_code=200');
         @$this->unit->run($err, '', 'curl運行正確');
 
-
-        $this->load->view('api/test');
-        $this->response($header, $data ? $data : $body, $info['request_header'], $param);
+        $this->load->view('api/test', [
+            'request_head' => $info['request_header'],
+            'request_body' => $param,
+            'response_head' => $header,
+            'response_body' => substr($response, $header_size),
+        ]);
         curl_close($curl);
-        echo $this->unit->report();
     }
 }
