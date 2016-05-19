@@ -16,39 +16,7 @@ abstract class TEST_Controller extends CI_Controller
 
     protected function test_device($method, $url, $param = null)
     {
-        $curl_options = [
-            CURLOPT_URL => $url,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 600,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => $method,
-            CURLINFO_HEADER_OUT => true,
-            CURLOPT_HEADER => 1,
-            CURLOPT_VERBOSE => 1
-        ];
-
-        if ($param) {
-            $dump = $param;
-            $curl_options[CURLOPT_POSTFIELDS] = $param;
-        }
-
-        $curl = curl_init();
-        curl_setopt_array($curl, $curl_options);
-        $response = curl_exec($curl);
-        $info = curl_getinfo($curl);
-
-        $header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
-        $header = substr($response, 0, $header_size);
-        $body = substr($response, $header_size);
-
-        echo nl2br($info['request_header']);
-        if ($dump) var_dump($dump);
-        echo '<hr >';
-        echo nl2br($header);
-        echo $body;
-        curl_close($curl);
+        $this->test($method, $url, $param);
     }
 
 
