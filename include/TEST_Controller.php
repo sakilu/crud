@@ -35,15 +35,15 @@ abstract class TEST_Controller extends CI_Controller
             CURLOPT_VERBOSE => 1
         ];
 
+        $curl_header = [];
         if ($auth) {
             $curl_header = $this->user_mock->get_signature();
-            $curl_header['Content-Type: application/x-www-form-urlencoded'];
-            $curl_options[CURLOPT_HTTPHEADER] = $curl_header;
         }
         if ($param) {
-            $curl_options[CURLOPT_POSTFIELDS] = $param;
+            $curl_options[CURLOPT_POSTFIELDS] = is_array($param) ? http_build_query($param) : $param;
+            $curl_header[] = 'Content-Type: application/x-www-form-urlencoded';
         }
-
+        if (!empty($curl_header)) $curl_options[CURLOPT_HTTPHEADER] = $curl_header;
         $curl = curl_init();
         curl_setopt_array($curl, $curl_options);
         $response = curl_exec($curl);
