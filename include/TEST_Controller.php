@@ -16,7 +16,7 @@ abstract class TEST_Controller extends CI_Controller
 
     protected function test_device($method, $url, $param = null)
     {
-        $this->test($method, $url, $param);
+        $this->test($method, $url, false, $param);
     }
 
 
