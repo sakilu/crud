@@ -34,8 +34,11 @@ abstract class TEST_Controller extends CI_Controller
             CURLOPT_HEADER => 1,
             CURLOPT_VERBOSE => 1
         ];
+
         if ($auth) {
-            $curl_options[CURLOPT_HTTPHEADER] = $this->user_mock->get_signature();
+            $curl_header = $this->user_mock->get_signature();
+            $curl_header['Content-Type: application/x-www-form-urlencoded'];
+            $curl_options[CURLOPT_HTTPHEADER] = $curl_header;
         }
         if ($param) {
             $curl_options[CURLOPT_POSTFIELDS] = $param;
