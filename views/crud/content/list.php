@@ -44,28 +44,12 @@
             },
             "stateSave": true,
             "stateSaveCallback": function (settings, data) {
-                // Send an Ajax request to the server with the state object
-                $.ajax({
-                    "url": "<?=base_url(sprintf('/%s/state_list_save', $this->crud->get_module_url()))?>",
-                    "data": data,
-                    "dataType": "json",
-                    "type": "POST",
-                    "success": function () {
-
-                    }
-                });
+                localStorage.setItem('list_<?=$this->crud->get_module_url()?>', JSON.stringify(data));
             },
             "stateLoadCallback": function (settings) {
-                var o;
-                $.ajax({
-                    "url": "<?=base_url(sprintf('/%s/state_list_load', $this->crud->get_module_url()))?>",
-                    "async": false,
-                    "dataType": "json",
-                    "success": function (json) {
-                        o = json;
-                    }
-                });
-                return o;
+                var obj = localStorage.getItem('list_<?=$this->crud->get_module_url()?>');
+                if (obj) obj = JSON.parse(obj);
+                return obj;
             }
         });
         <?php $count = 0;?>
