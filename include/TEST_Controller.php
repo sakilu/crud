@@ -52,7 +52,7 @@ abstract class TEST_Controller extends CI_Controller
     }
 
 
-    protected function test($method, $url, $auth, $param = null, $no_debug = false)
+    protected function test($method, $url, $auth, $param = null, $test = true)
     {
         $curl_options = [
             CURLOPT_URL => $url,
@@ -82,38 +82,17 @@ abstract class TEST_Controller extends CI_Controller
         $header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
         $header = substr($response, 0, $header_size);
         $body = substr($response, $header_size);
+
         $data = json_decode($body, true);
-        if ($no_debug) $data = $data['body'];
+        @$this->unit->run($data['error'], 'is_false', 'error = false');
+        @$this->unit->run($data['error_msg'], 'is_null', 'error_msg = null');
+        @$this->unit->run($info['http_code'], '200', 'http_code=200');
+        @$this->unit->run($err, '', 'curl運行正確');
 
-        if (!$no_debug) {
-            @$this->unit->run($data['error'], 'is_false', 'error = false');
-            @$this->unit->run($data['error_msg'], 'is_null', 'error_msg = null');
-            @$this->unit->run($info['http_code'], '200', 'http_code=200');
-            @$this->unit->run($err, '', 'curl運行正確');
-        } else {
-            echo json_encode($data);
-            exit;
-        }
 
+        $this->load->view('api/test');
         $this->response($header, $data ? $data : $body, $info['request_header'], $param);
         curl_close($curl);
         echo $this->unit->report();
-
     }
-
-    protected function response($res_header, $res_body, $req_header, $req_body = null)
-    {
-        echo 'json解析用網址 => http://www.jsoneditoronline.org/';
-        echo '<br />';
-        echo nl2br($req_header);
-        if ($req_body) echo json_encode($req_body);
-        echo '<hr >';
-        echo nl2br($res_header);
-        if (!is_array($res_body) && !is_object($res_body)) {
-            echo '<pre>' . $res_body . '</pre>';
-        } else {
-            echo '<pre>' . json_encode($res_body) . '</pre>';
-        }
-    }
-
 }
