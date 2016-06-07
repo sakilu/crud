@@ -27,6 +27,11 @@ class Crud
     protected $CI;
 
     /**
+     * @var
+     */
+    protected $_checkbox_field = null;
+
+    /**
      *
      */
     public function __construct()
@@ -52,6 +57,16 @@ class Crud
     public function get_controller()
     {
         return $this->_controller;
+    }
+
+    public function set_check($column)
+    {
+        $this->_checkbox_field = $column;
+    }
+
+    public function get_check()
+    {
+        return $this->_checkbox_field;
     }
 
     /**
@@ -151,6 +166,7 @@ class Crud
         foreach ($db->get($table)->result() as $_db_row) {
             $_row = [];
             $i = 0;
+
             foreach ($this->get(self::KEY_COLUMNS) as $column) {
                 if ($column instanceof AbstractColumn) {
                     $field = $column->get(AbstractColumn::KEY_FIELD);

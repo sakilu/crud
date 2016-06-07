@@ -22,6 +22,9 @@
         <?php $count = 0;?>
 
         submit_table<?=$rand?> = $('#datatable<?=$rand?>').DataTable({
+            "select": {
+                style: 'multi'
+            },
             "iDisplayLength": 10,
             "aLengthMenu": [
                 [5, 10, 25, 50, -1],

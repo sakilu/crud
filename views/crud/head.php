@@ -44,6 +44,9 @@
     <!-- Vendor CSS -->
     <link rel="stylesheet" type="text/css" href="<?= base_url() ?>vendor/plugins/magnific/magnific-popup.css">
 
+    <!-- Fancytree CSS -->
+    <link rel="stylesheet" type="text/css" href="<?= base_url() ?>vendor/plugins/fancytree/skin-win8/ui.fancytree.min.css">
+
     <!-- Theme CSS -->
     <link rel="stylesheet" type="text/css" href="<?= base_url() ?>assets/skin/default_skin/css/theme.css">
 

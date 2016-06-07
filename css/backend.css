@@ -83,6 +83,10 @@ div.appendGrid table td.last {
     z-index: 10000 !important;
 }
 
+table.dataTable Tr.selected {
+    background-color: #f5f5f5;
+}
+
 /*table.dataTable.table-striped {*/
 /*margin-top: 0px !important;*/
 /*margin-bottom: 0px !important;*/

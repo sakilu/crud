@@ -15,6 +15,8 @@
 <!-- Datatables Bootstrap Modifications  -->
 <script src="<?= base_url() ?>vendor/plugins/datatables/media/js/dataTables.bootstrap.js"></script>
 
+<script src="<?= base_url() ?>crud/js/dataTables.select.js"></script>
+
 <script src="<?= base_url() ?>vendor/plugins/highcharts/highcharts.js"></script>
 
 <!-- JvectorMap Plugin + US Map (more maps in plugin/assets folder) -->
@@ -76,8 +78,26 @@
 
 <!-- Adup Javascript -->
 <script src="<?= base_url() ?>crud/js/jquery.dataTables.yadcf.js"></script>
-<script src="<?= base_url() ?>crud/js/backend.js"></script>
 
+<!-- Fancytree Plugin -->
+<script src="<?= base_url() ?>vendor/plugins/fancytree/jquery.fancytree-all.min.js"></script>
+
+<!-- Fancytree Addon - Childcounter -->
+<script src="<?= base_url() ?>vendor/plugins/fancytree/extensions/jquery.fancytree.childcounter.js"></script>
+
+<!-- Fancytree Addon - ColumnView -->
+<script src="<?= base_url() ?>vendor/plugins/fancytree/extensions/jquery.fancytree.columnview.js"></script>
+
+<!-- Fancytree Addon - Drag and Drop -->
+<script src="<?= base_url() ?>vendor/plugins/fancytree/extensions/jquery.fancytree.dnd.js"></script>
+
+<!-- Fancytree Addon - Inline Edit -->
+<script src="<?= base_url() ?>vendor/plugins/fancytree/extensions/jquery.fancytree.edit.js"></script>
+
+<!-- Fancytree Addon - Inline Edit -->
+<script src="<?= base_url() ?>vendor/plugins/fancytree/extensions/jquery.fancytree.filter.js"></script>
+
+<script src="<?= base_url() ?>crud/js/backend.js"></script>
 
 <script>
     jQuery(document).ready(function () {
