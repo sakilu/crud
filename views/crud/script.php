@@ -106,7 +106,7 @@
         Core.init();
 
         <?php if($this->auth->get_id()){ ?>
-        setInterval(session_check, 6000);
+        setInterval(session_check, 60000);
         function session_check() {
             $.ajax({
                 url: '<?=base_url(sprintf('%slogin/is_logged/', $this->crud->get_prefix()));?>',
