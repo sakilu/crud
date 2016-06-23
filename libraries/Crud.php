@@ -278,9 +278,11 @@ abstract class AbstractColumn
         $key_info = $this->get(self::KEY_INFO);
         $type = ($key_info instanceof Field_info) ? $key_info->get_type() : false;
         if (strpos($type, 'datetime') !== false) {
+            if (!$value) return '';
             return strpos($value, '0000-00-00') !== false ? '' : substr($value, 0, 16);
         }
         if (strpos($type, 'timestamp') !== false) {
+            if (!$value) return '';
             return strpos($value, '0000-00-00') !== false ? '' : substr($value, 0, 16);
         }
         if (strpos($type, 'date') !== false) {

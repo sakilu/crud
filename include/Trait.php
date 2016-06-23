@@ -14,9 +14,6 @@ trait Container
     public function __construct()
     {
         $this->_config = $this->config->item(strtolower(get_class($this)));
-        if (!$this->layout->is_ajax_request()) {
-            $this->logger->addDebug(get_class($this) . ' Init', $this->_config);
-        }
     }
 
     public function config($k)
