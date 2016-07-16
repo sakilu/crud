@@ -211,7 +211,6 @@ class Form
         if (strpos($type, 'enum') !== false) {
             $enums = gender_enums($column->get(Column::KEY_TABLE), $column->get(Column::KEY_FIELD));
             if ($this->get(self::KEY_READONLY)) return sprintf('<p class="form-control-static">%s</p>', $enums[$value]);
-            debug($type, [$enums]);
             return form_dropdown($field_name, $enums, $value, array_merge([
                 'class' => 'select2-single form-control',
                 'id' => $field_name,

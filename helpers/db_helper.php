@@ -49,6 +49,43 @@ if (!function_exists('ddd')) {
         $ci = &get_instance();
         if ($ci->db->table_exists('debug')) {
             $ci->db->insert('debug', ['debug_msg' => $msg]);
+            return $ci->db->insert_id();
+        }
+    }
+}
+
+if (!function_exists('ip')) {
+    function ip()
+    {
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } else {
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+        return $ip;
+    }
+}
+
+if (!function_exists('ddd_update')) {
+    function ddd_update($msg, $id)
+    {
+        $ci = &get_instance();
+        if ($ci->db->table_exists('debug')) {
+            $ci->db->where('debug_id', $id);
+            $ci->db->update('debug', ['debug_msg' => $msg]);
+        }
+    }
+}
+
+if (!function_exists('ddd_del')) {
+    function ddd_del($id)
+    {
+        $ci = &get_instance();
+        if ($ci->db->table_exists('debug')) {
+            $ci->db->where('debug_id', $id);
+            $ci->db->delete('debug');
         }
     }
 }
