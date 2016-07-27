@@ -218,8 +218,6 @@ abstract class AbstractColumn
 
     public $by_db = true;
 
-    protected $_def = [];
-
     const KEY_INFO = 'key_info';
 
     const KEY_FIELD = 'key_field';
@@ -232,6 +230,7 @@ abstract class AbstractColumn
 
     const KEY_CALLBACK_GETVALUE = 'key_callback_value';
 
+    const KEY_EDIT_VIEW_PATH = 'key_edit_view_path';
 
     public function __construct($_table, $_field, $_display, $width = null)
     {
@@ -239,6 +238,7 @@ abstract class AbstractColumn
         $this->set(self::KEY_DISPLAY, $_display);
         $this->set(self::KEY_TABLE, $_table);
         $this->set(self::KEY_INFO, get_col_info($_table, $_field));
+        $this->set(self::KEY_EDIT_VIEW_PATH, 'key_edit_view_path');
         if (!is_null($width)) {
             $this->set_width($width);
         }
@@ -474,6 +474,7 @@ class Column_prototype extends AbstractColumn
         $this->set(self::KEY_FIELD, $_field);
         $this->set(self::KEY_DISPLAY, $_display);
         $this->set(self::KEY_TABLE, $_table);
+        $this->set(self::KEY_EDIT_VIEW_PATH, 'key_edit_view_path');
         if (!is_null($width)) {
             $this->set_width($width);
         }
@@ -611,6 +612,8 @@ class Column_edit extends AbstractColumn
         $this->set(self::KEY_FIELD, $_field);
         $this->set(self::KEY_DISPLAY, $_display);
         $this->set(self::KEY_TABLE, $_table);
+        $this->set(self::KEY_EDIT_VIEW_PATH, 'crud/list_help/edit');
+
         if (!is_null($width)) {
             $this->set_width($width);
         } else {
@@ -620,28 +623,11 @@ class Column_edit extends AbstractColumn
 
     public function get_value($value, $row)
     {
-        return $this->load->view('crud/list_help/edit', [
+        return $this->load->view($this->get(self::KEY_EDIT_VIEW_PATH), [
             'primary_value' => $row->{$this->get(self::KEY_FIELD)},
             'column_edit_trash' => $this->trash_enable,
             'column_edit_edit' => $this->edit_enable,
             'column_edit_view' => $this->view_enable,
-        ], true);
-    }
-
-    public function get_yadcf_setting($key)
-    {
-        return '';
-    }
-}
-
-class Column_edit_only extends AbstractColumn
-{
-    public $by_db = false;
-
-    public function get_value($value, $row)
-    {
-        return $this->load->view('crud/list_help/edit_only', [
-            'primary_value' => $row->{$this->get(self::KEY_FIELD)}
         ], true);
     }
 
@@ -657,7 +643,7 @@ class Column_view extends AbstractColumn
 
     public function get_value($value, $row)
     {
-        return $this->load->view('crud/list_help/view', [
+        return $this->load->view($this->get(self::KEY_EDIT_VIEW_PATH), [
             'primary_value' => $row->{$this->get(self::KEY_FIELD)}
         ], true);
     }

@@ -47,10 +47,10 @@
             },
             "stateSave": true,
             "stateSaveCallback": function (settings, data) {
-                localStorage.setItem('list_<?=$this->crud->get_module_url()?>', JSON.stringify(data));
+                localStorage.setItem('list_<?=$this->crud->get_module_url()?>_<?=$this->router->fetch_method()?>', JSON.stringify(data));
             },
             "stateLoadCallback": function (settings) {
-                var obj = localStorage.getItem('list_<?=$this->crud->get_module_url()?>');
+                var obj = localStorage.getItem('list_<?=$this->crud->get_module_url()?>_<?=$this->router->fetch_method()?>');
                 if (obj) obj = JSON.parse(obj);
                 return obj;
             }
